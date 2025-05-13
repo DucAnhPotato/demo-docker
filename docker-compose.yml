@@ -1,0 +1,27 @@
+version: '1'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: maska
+    ports:
+      - "3307:3306"
+    networks:
+      - demo_network
+  spring-demo-docker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - demo_network
+networks:
+  demo_network:
+    driver: bridge
