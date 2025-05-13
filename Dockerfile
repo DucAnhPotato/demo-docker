@@ -8,7 +8,7 @@ COPY . /app/
 RUN mvn -f /app/pom.xml clean package -DskipTests
 
 
-FROM openjdk-17.0.2
+FROM openjdk-17.0.2-jdk
 
 WORKDIR /app
 
